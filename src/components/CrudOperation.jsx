@@ -1,3 +1,4 @@
+
 import React from "react";
 import "./Crud.css";
 import { useState } from "react";
@@ -11,8 +12,8 @@ function CrudOperation() {
     setInputData(e.target.value);
   }
 
-  const addData = () => {
-    if (inputData.trim() !== "") {
+  const addData = (e) => {
+    if ((e.key === "Enter" || e.type === "click") && inputData.trim() !== "") {
       setData([...data, inputData]);
       setInputData("");
     }
@@ -44,7 +45,12 @@ function CrudOperation() {
   return (
     <div className="container">
       <div className="input-container">
-        <input type="text" value={inputData} onChange={handleInput} />
+        <input
+          type="text"
+          value={inputData}
+          onChange={handleInput}
+          onKeyPress={addData}
+        />
         <button className="add-button" onClick={addData}>
           Add
         </button>
